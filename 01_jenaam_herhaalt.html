@@ -1,0 +1,25 @@
+<!-- Programmeur: Jan Verheyen -->
+<!-- Datum: 26 juni 2024 -->
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01_jenaam_herhaalt.html</title>
+</head>
+<body>
+    <script>
+        // Herhaallus die "Hallo wereld" 6 keer schrijft, van <h1> tot <h6>
+        for (let i = 1; i <= 6; i++) {
+            // Maak een element van het type h1, h2, ..., h6
+            let heading = document.createElement('h' + i);
+            // Voeg de tekst "Hallo wereld" toe aan het element
+            heading.innerText = "Hallo wereld";
+            // Voeg het element toe aan de body van het document
+            document.body.appendChild(heading);
+        }
+    </script>
+</body>
+</html>
+
+

@@ -1,0 +1,78 @@
+<!-- 
+    Programmeur: Jan Verheyen
+    Datum: 2024-06-27
+-->
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <title>Getallen Invoer</title>
+    <script>
+        "use strict";
+
+        // Hoofdfunctie die het script uitvoert
+        function main() {
+            let getallen = [];
+
+            // Vraag de gebruiker hoeveel getallen hij wil ingeven
+            let aantal = prompt("Hoeveel getallen wilt u ingeven?");
+            
+            // Controleer het aantal
+            aantal = controleAantal(aantal);
+            
+            // Als het aantal geldig is, vraag de getallen in een lus
+            if (aantal !== false) {
+                for (let i = 0; i < aantal; i++) {
+                    let getal = prompt(`Geef getal ${i + 1} in:`);
+
+                    // Controleer het getal
+                    getal = controleGetal(getal);
+
+                    // Voeg het getal toe aan de array indien geldig
+                    if (getal !== "fout") {
+                        getallen.push(Number(getal));
+                    } else {
+                        document.write(`Foute invoer bij getal ${i + 1}.<br>`);
+                        break; // Breek de lus als er een fout is
+                    }
+                }
+
+                // Schrijf de array naar het document
+                document.write("De ingevoerde getallen zijn: " + getallen.join(", ") + "<br>");
+            }
+        }
+
+        // Functie-expressie om het aantal te controleren
+        const controleAantal = function(input) {
+            if (input === null) {
+                document.write("U hebt geannuleerd.<br>");
+                return false;
+            }
+            if (input.trim() === "") {
+                document.write("U heeft niets ingegeven.<br>");
+                return false;
+            }
+            let getal = Number(input);
+            if (!isNaN(getal) && Number.isInteger(getal) && getal > 0) {
+                return getal;
+            } else {
+                document.write("Dit is geen correcte ingave.<br>");
+                return false;
+            }
+        };
+
+        // Functie-expressie om een getal te controleren
+        const controleGetal = function(input) {
+            if (input === null || input.trim() === "" || isNaN(Number(input))) {
+                return "fout";
+            }
+            return Number(input);
+        };
+
+        // Voer het script uit zodra de pagina is geladen
+        window.onload = main;
+    </script>
+</head>
+<body>
+</body>
+</html>

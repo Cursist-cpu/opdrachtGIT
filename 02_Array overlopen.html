@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<!-- 
+Jan Verheyen - Programmeur
+Datum: 26-06-2024
+-->
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto Merken Overlopen</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        label, input, button {
+            display: block;
+            margin-bottom: 10px;
+        }
+        input[type="number"], input[type="text"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+            max-width: 300px;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .merk-list {
+            margin-top: 20px;
+        }
+        .merk-list li {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Auto Merken Overlopen</h1>
+    <label for="aantal">Hoeveel automerken wilt u ingeven?</label>
+    <input type="number" id="aantal" min="1" max="10" required>
+    <button onclick="vraagMerken()">Invoeren</button>
+    
+    <div id="merken-section" style="display:none;">
+        <h2>Voer de automerken in:</h2>
+        <div id="merken-inputs"></div>
+        <button onclick="toonMerken()">Toon Merken</button>
+    </div>
+
+    <div id="result-section" style="display:none;">
+        <h2>U gaf de volgende merken in:</h2>
+        <ul class="merk-list" id="merken-lijst"></ul>
+    </div>
+
+    <script>
+        // Functie om inputvelden voor automerken te genereren
+        function vraagMerken() {
+            const aantal = parseInt(document.getElementById('aantal').value);
+            const merkenSection = document.getElementById('merken-section');
+            const merkenInputs = document.getElementById('merken-inputs');
+            
+            merkenInputs.innerHTML = ''; // Reset inputvelden
+
+            if (aantal > 0) {
+                for (let i = 1; i <= aantal; i++) {
+                    let input = document.createElement('input');
+                    input.type = 'text';
+                    input.placeholder = `Merk ${i}`;
+                    input.id = `merk${i}`;
+                    merkenInputs.appendChild(input);
+                }
+                merkenSection.style.display = 'block';
+            }
+        }
+
+        // Functie om de ingevoerde merken weer te geven
+        function toonMerken() {
+            const aantal = parseInt(document.getElementById('aantal').value);
+            const merkenLijst = document.getElementById('merken-lijst');
+            let merkenArray = [];
+            merkenLijst.innerHTML = ''; // Reset de lijst
+
+            for (let i = 1; i <= aantal; i++) {
+                let merk = document.getElementById(`merk${i}`).value;
+                merkenArray.push(merk);
+            }
+
+            for (let i = 0; i < merkenArray.length; i++) {
+                let li = document.createElement('li');
+                li.textContent = `${i + 1}. ${merkenArray[i]}`;
+                merkenLijst.appendChild(li);
+            }
+
+            document.getElementById('result-section').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
